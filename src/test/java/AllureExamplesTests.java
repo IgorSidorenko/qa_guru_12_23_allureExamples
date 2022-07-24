@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
-
 public class AllureExamplesTests extends TestBase {
     @Test
     @AllureId("11575")
@@ -19,5 +18,17 @@ public class AllureExamplesTests extends TestBase {
         step("Ввести логин");
         step("Ввести пароль");
         step("Ввести в поле поиска selenide и нажать Enter");
+    }
+
+    @Test
+    @AllureId("11576")
+    @DisplayName("Открыть страницу в Wikipedia")
+    @Owner("allure8")
+    @Tag("test")
+    public void testGithubOpenPage() {
+        step("Откройте страницу");
+        step("Нажать авторизоваться");
+        step("Ввести логин");
+        step("Ввести пароль");
     }
 }
