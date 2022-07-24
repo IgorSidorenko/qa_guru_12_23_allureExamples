@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.9.6"
+}
+
+group 'org.example'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+def selenideVersion = "5.24.4",
+    junitVersion = "5.8.1",
+    assertjVersion = "3.19.0",
+    ownerVersion = "1.0.12",
+    seleniumVersion = "3.141.59",
+    slf4jVersion = "1.7.32"
+
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:$selenideVersion",
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.slf4j:slf4j-api:$slf4jVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            'io.qameta.allure:allure-selenide:2.17.3',
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+    )
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion"
+    )
+}
+allure {
+    report {
+        version.set("2.17.3") //версия Allure Report (https://github.com/allure-framework/allure2)
+    }
+    adapter {
+        aspectjWeaver.set(true) // обработка аннотации @Step
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.17.3") //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
+            }
+        }
+    }
+}
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+
+task tests (type: Test) {
+    useJUnitPlatform{
+        includeTags "tests"
+    }
+}
