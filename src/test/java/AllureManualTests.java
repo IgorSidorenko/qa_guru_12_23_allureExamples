@@ -1,30 +1,19 @@
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
 public class AllureManualTests {
     @Test
-    @AllureId("11565")
-    @DisplayName("Test demo link")
+    @AllureId("11574")
+    @DisplayName("Поиск страницы в  GitHub")
     @Owner("allure8")
-    void testDemoLink() {
-        step("Opening the page");
-        step("Scrolling to the bottom of the page");
-        step("Clicking the About Us link");
-        step("Checking the About Us header");
+    public void searchPage() {
+        step("Откройте страницу  Github");
+        step("Ввести в поле поиска selenide и нажать Enter");
+        step("Перейти в раздел Wiki проекта");
+        step("Убедится, что в списке страниц (Pages) есть страница SoftAssertions");
+        step("Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5");
     }
-    @Test
-    @AllureId("11566")
-    @DisplayName("Поиск страницы в Github")
-    @Owner("allure8")
-    void SearchPageGithub(){
-        step("Open page  Github");
-        step("Scrolling to the bottom of the page");
-        step("Clicking the About Us link");
-        step("Checking the About Us header");
-}
 }
